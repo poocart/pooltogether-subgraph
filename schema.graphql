@@ -1,0 +1,13 @@
+type Deposit @entity {
+    id: ID!
+    assetAddress: Bytes!
+    sender: Bytes!
+    amount: BigInt!
+}
+
+type Withdraw @entity {
+    id: ID!
+    assetAddress: Bytes!
+    sender: Bytes!
+    amount: BigInt!
+}

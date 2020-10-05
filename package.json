@@ -1,0 +1,15 @@
+{
+  "name": "pooltogether-historical-subgraph",
+  "version": "0.0.1",
+  "dependencies": {
+    "@graphprotocol/graph-cli": "^0.18.0",
+    "@graphprotocol/graph-ts": "^0.18.1",
+    "mustache": "^4.0.1"
+  },
+  "scripts": {
+    "subgraph:prepare": "mustache config/mainnet.json subgraph.template.yaml > subgraph.mainnet.yaml",
+    "subgraph:codegen": "graph codegen subgraph.mainnet.yaml",
+    "subgraph:build": "graph build",
+    "subgraph:deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ poocart/pooltogether-player-history subgraph.mainnet.yaml"
+  }
+}

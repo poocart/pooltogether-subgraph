@@ -1,0 +1,54 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: DaiContract
+    network: {{network}}
+    source:
+      address: "{{addressDai}}"
+      abi: DaiContract
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Deposited
+        - Withdrawn
+      abis:
+        - name: DaiContract
+          file: ./contractAbi.json
+      eventHandlers:
+        - event: Deposited(indexed address,uint256)
+          handler: handleDeposited
+        - event: Withdrawn(indexed address,uint256)
+          handler: handleWithdrawn
+        - event: OpenDepositWithdrawn(indexed address,uint256)
+          handler: handleWithdrawn
+      file: ./mapping.ts
+  - kind: ethereum/contract
+    name: UsdcContract
+    network: {{network}}
+    source:
+      address: "{{addressUsdc}}"
+      abi: UsdcContract
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Deposited
+        - Withdrawn
+      abis:
+        - name: UsdcContract
+          file: ./contractAbi.json
+      eventHandlers:
+        - event: Deposited(indexed address,uint256)
+          handler: handleDeposited
+        - event: Withdrawn(indexed address,uint256)
+          handler: handleWithdrawn
+        - event: OpenDepositWithdrawn(indexed address,uint256)
+          handler: handleWithdrawn
+      file: ./mapping.ts
